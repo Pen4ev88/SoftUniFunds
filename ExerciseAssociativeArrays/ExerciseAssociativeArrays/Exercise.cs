@@ -54,7 +54,7 @@ namespace SoftUniFunds.ExerciseAssociativeArrays
                 }
                 resourceDict[resource] += quantity;
             }
-            while (true);   
+            while (true);
 
             foreach (var kvp in resourceDict)
             {
@@ -72,8 +72,8 @@ namespace SoftUniFunds.ExerciseAssociativeArrays
 
             bool flagWin = false;
 
-            while(!flagWin) 
-            { 
+            while (!flagWin)
+            {
                 var array = Console.ReadLine().Split().ToArray();
 
                 for (int i = 0; i < array.Length; i += 2)
@@ -129,15 +129,17 @@ namespace SoftUniFunds.ExerciseAssociativeArrays
                 }
             }
 
-            if(farmDict.Count() < 3)
+            if (farmDict.Count() < 3)
             {
                 if (!farmDict.ContainsKey("fragments"))
                 {
                     farmDict["fragments"] = 0;
-                }                if (!farmDict.ContainsKey("motes"))
+                }
+                if (!farmDict.ContainsKey("motes"))
                 {
                     farmDict["motes"] = 0;
-                }                if (!farmDict.ContainsKey("shards"))
+                }
+                if (!farmDict.ContainsKey("shards"))
                 {
                     farmDict["shards"] = 0;
                 }
@@ -148,10 +150,10 @@ namespace SoftUniFunds.ExerciseAssociativeArrays
                                   .ThenBy(kvp => kvp.Key)
                                   .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
 
-           var secondFarm = farmDictJunk.Select(kvp => kvp)
-                                .OrderBy(kvp => kvp.Key)
-                                .ThenBy(kvp => kvp.Value)
-                                .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            var secondFarm = farmDictJunk.Select(kvp => kvp)
+                                 .OrderBy(kvp => kvp.Key)
+                                 .ThenBy(kvp => kvp.Value)
+                                 .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
 
             foreach (var kvp in firstfarm)
             {
@@ -195,7 +197,7 @@ namespace SoftUniFunds.ExerciseAssociativeArrays
                 {
                     productDict[product[0]].Remove(productDict[product[0]].First());
                     productDict[product[0]].Add(price);
-                    quantity += productDict[product[0]].First();                    
+                    quantity += productDict[product[0]].First();
                     productDict[product[0]].Remove(productDict[product[0]].First());
                     productDict[product[0]].Add(quantity);
                 }
@@ -229,8 +231,8 @@ namespace SoftUniFunds.ExerciseAssociativeArrays
                     if (!parkAccount.ContainsKey(userId))
                     {
                         parkAccount[userId] = user[2];
-                        stringBuilder.Append($"{userId} registered {user[2]} successfully\n");         
-                    }                    
+                        stringBuilder.Append($"{userId} registered {user[2]} successfully\n");
+                    }
                     else
                     {
                         stringBuilder.Append($"ERROR: already registered with plate number {user[2]}\n");
@@ -248,14 +250,56 @@ namespace SoftUniFunds.ExerciseAssociativeArrays
                         parkAccount.Remove(user[1]);
                     }
                 }
-            }          
+            }
 
             foreach (var user in parkAccount)
             {
-                stringBuilder.Append($"{user.Key} => {user.Value}\n");                
+                stringBuilder.Append($"{user.Key} => {user.Value}\n");
             }
 
             Console.WriteLine(stringBuilder);
         }
+
+        public void Courses()
+        {
+            var courcesDict = new Dictionary<string, List<string>>();
+            string[] cource = new string[2];
+
+            do
+            {
+                cource = Console.ReadLine()
+                    .Split(" : ")
+                    .ToArray();
+
+                if (cource[0] == "end")
+                    break;
+
+                if (!courcesDict.ContainsKey(cource[0]))
+                {
+                    courcesDict[cource[0]] = new List<string>();
+                    courcesDict[cource[0]].Add(cource[1]);
+                }
+                else
+                {
+                    courcesDict[cource[0]].Add(cource[1]);
+                }
+
+            }
+            while (true);
+
+            var courceDictFinal = courcesDict.Select(c => c)
+                                             .OrderByDescending(c => c.Value.Count())
+                                             .ToDictionary(c => c.Key, c => c.Value);
+
+            foreach (var kvp in courceDictFinal)
+            {
+                Console.Write($"{kvp.Key}: {kvp.Value.Count()}\n");
+                foreach (var item in kvp.Value.OrderBy(n => n))
+                {
+                    Console.Write($"-- {item}\n");
+                }                          
+            }
+        }
+
     }
 }

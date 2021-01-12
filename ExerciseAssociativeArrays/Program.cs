@@ -14,6 +14,7 @@ namespace ExerciseAssociativeArrays
             Console.WriteLine("3. LegendaryFarming:");
             Console.WriteLine("4. Orders:");
             Console.WriteLine("5. SoftUniParking:");
+            Console.WriteLine("6. Cources:");
 
             int switch_on = int.Parse(Console.ReadLine());
 
@@ -42,6 +43,11 @@ namespace ExerciseAssociativeArrays
                  case 5:
                     {
                         exercise.SoftUniParking();
+                        break;
+                    } 
+                 case 6:
+                    {
+                        exercise.Courses();
                         break;
                     } 
 
