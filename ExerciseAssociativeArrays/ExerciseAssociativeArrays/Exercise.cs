@@ -297,7 +297,71 @@ namespace SoftUniFunds.ExerciseAssociativeArrays
                 foreach (var item in kvp.Value.OrderBy(n => n))
                 {
                     Console.Write($"-- {item}\n");
-                }                          
+                }
+            }
+        }
+
+        public void StudentAcademy()
+        {
+            var studentDict = new Dictionary<string, List<double>>();
+
+            var students = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < students; i++)
+            {
+                var name = Console.ReadLine();
+                var grade = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+
+                if (!studentDict.ContainsKey(name))
+                {
+                    studentDict[name] = new List<double>();
+                    //studentDict[name].Add(grade);
+                }
+                studentDict[name].Add(grade);
+            }
+
+            Console.WriteLine(string.Join("\n", studentDict
+                                   .Where(s => (s.Value.Sum() / s.Value.Count) >= 4.5)
+                                   .OrderByDescending(s => s.Value.Sum() / s.Value.Count)
+                                   .Select(s => $"{s.Key} -> {s.Value.Sum() / s.Value.Count():F2}")));
+        }
+
+        public void CompanyUser()
+        {
+            var companyDict = new Dictionary<string, List<string>>();
+
+            while (true)
+            {
+                var company = Console.ReadLine()
+                    .Split(" -> ")
+                    .ToArray();                
+
+                if (company[0] == "End")
+                    break;
+
+                if (!companyDict.ContainsKey(company[0]))
+                {
+                    companyDict[company[0]] = new List<string>();
+                    companyDict[company[0]].Add(company[1]);
+                }
+                else 
+                {
+                    if (!companyDict[company[0]].Contains(company[1]))
+                    {
+                        companyDict[company[0]].Add(company[1]);
+                    }
+                }
+            }
+
+            companyDict = companyDict.OrderBy(c => c.Key).ToDictionary(c => c.Key, c => c.Value);
+
+            foreach (var company in companyDict.OrderBy(c => c.Key))
+            {
+                Console.WriteLine($"{company.Key}");
+                foreach (var id in company.Value)
+                {
+                    Console.WriteLine($"-- {id}");
+                }
             }
         }
 
