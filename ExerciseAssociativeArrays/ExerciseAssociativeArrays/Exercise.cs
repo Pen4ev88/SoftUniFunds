@@ -365,5 +365,214 @@ namespace SoftUniFunds.ExerciseAssociativeArrays
             }
         }
 
+        public void ForceBook()
+        {
+            var forceSide = new SortedDictionary<string, string>();
+            var sideTranslate = new Dictionary<string, string>();
+
+            var sideMember = new SortedDictionary<string, int>();
+
+            while (true)
+            {
+                var userForce = Console.ReadLine();
+
+                if (userForce == "Lumpawaroo")
+                    break;
+
+                if (userForce.Contains("|"))
+                {
+
+                    var force = userForce.Split(" | ").ToArray();
+
+                    // COUNT MEMBER
+                    if (!sideMember.ContainsKey(force.First()))
+                    {
+                        sideMember[force.First()] = 1;
+                    }
+                    else
+                    {
+                        sideMember[force.First()]++;
+                    }
+
+                    // Add side members
+                    if (!forceSide.ContainsKey(force.First()))
+                    {
+                        forceSide[force.Last()] = "";
+                        forceSide[force.Last()] = force.First();
+                    }
+                    else
+                    {
+                        if (!forceSide[force.Last()].Contains(force.First()))
+                        {
+                            forceSide[force.Last()] = force.First();
+                        }
+                    }
+                }
+                if (userForce.Contains(">"))    // change SIDE or Create new Force User
+                {
+                    var forceTrance = userForce.Split(" -> ").ToArray();
+
+                    if (!forceSide.ContainsKey(forceTrance.First())) // create new user
+                    {
+                        forceSide[forceTrance.First()] = forceTrance.Last();
+
+                        if (!sideMember.ContainsKey(forceTrance.Last()))
+                        {
+                            sideMember[forceTrance.Last()] = 1;
+                        }
+                        else
+                        {
+                            sideMember[forceTrance.Last()]++;
+                        }
+                    }
+                    else // remove user from his SIDE and add to Oposite Side
+                    {
+                        forceSide.Remove(forceTrance.First());
+
+                        forceSide[forceTrance.First()] = forceTrance.Last();
+                        sideMember[forceTrance.Last().ToString()]++;
+                    }
+
+                    if (!sideTranslate.ContainsKey(forceTrance.First()))
+                    {
+                        sideTranslate[forceTrance.First()] = "";
+                        sideTranslate[forceTrance.First()] = forceTrance.Last();
+                    }
+                    else
+                    {
+                        if (!sideTranslate[forceTrance.First()].Contains(forceTrance.Last()))
+                        {
+                            sideTranslate[forceTrance.First()] = forceTrance.Last();
+                        }
+                    }
+                }
+            }
+
+            foreach (var usr in sideTranslate)
+            {
+                Console.WriteLine($"{usr.Key } joins the {usr.Value} side!");
+            }       
+
+            var someSide = forceSide.OrderBy(f => f.Value).ToDictionary(f => f.Key, f => f.Value);
+
+            if (someSide.Values.First() == someSide.Values.Last())
+            { 
+                Console.Write("Side: ");
+                Console.WriteLine($"{someSide.Values.First()}, Member: {someSide.Values.Count}");
+
+                foreach (var usr in forceSide.OrderBy(c => c.Key))
+                {
+                    Console.WriteLine($"! {usr.Key}");
+                }
+            }
+            else
+            {
+                var sideL = someSide.Values.First();
+                var sideR = someSide.Values.Last();
+
+                var memberCountL = forceSide.Where(f => f.Value == sideL).Count();
+                Console.Write("Side: ");
+                Console.WriteLine($"{sideL}, Members: {memberCountL}");
+                                
+                foreach (var usr in someSide.Where(s => s.Value == sideL))
+                {
+                    Console.WriteLine($"! {usr.Key}");
+                }
+
+                var memberCountR = forceSide.Where(f => f.Value == sideR).Count();
+                Console.Write("Side: ");
+                Console.WriteLine($"{sideR}, Members: {memberCountR}");
+
+                foreach (var usr in someSide.Where(s => s.Value == sideR))
+                {
+                    Console.WriteLine($"! {usr.Key}");
+                }
+            }            
+        }
+
+        public void SoftUniExam()
+        {
+            var resultExam = new Dictionary<string, List<int>>();
+
+            var submission = new SortedDictionary<string, int>();
+
+            var langDict = new SortedDictionary<string, int>();
+
+            while (true)
+            {
+                bool ban = false;
+
+                var input = Console.ReadLine();
+
+                if (input == "exam finished")
+                    break;
+                
+                var studentRes = input.Split("-");
+                var nameLang = studentRes[0];
+                string lang = "";
+                int grade = 0;
+
+                if (!input.Contains("banned"))
+                {
+                    lang = studentRes[1];
+                    grade = int.Parse(studentRes[2]);
+
+                    if (!resultExam.ContainsKey(nameLang))
+                    {
+                        resultExam[nameLang] = new List<int>();
+                        resultExam[nameLang].Add(grade);
+                    }
+                    else 
+                    {
+                        resultExam[nameLang].Add(grade);
+                    }
+
+                    if (!langDict.ContainsKey(lang))
+                    {
+                        langDict[lang] = 1;
+                    }
+                    else
+                    { 
+                        langDict[lang]++;                        
+                    }
+
+                }
+                else
+                { 
+                    ban = true; 
+
+                    foreach (var item in resultExam.Where(kvp => kvp.Key.StartsWith(studentRes[0])).ToList())
+                    {
+                        resultExam.Remove(item.Key);
+                    }
+                }            
+            }
+
+            var resultMax = new SortedDictionary<string, int>();
+            foreach (var user in resultExam)
+            {
+                if (!resultMax.ContainsKey(user.Key))
+                {
+                    resultMax[user.Key] = user.Value.Select(s => s).Max();
+                }
+            }
+
+            Console.WriteLine("Results:");
+
+            var resultMaxF = resultMax.OrderByDescending(r => r.Value).ToDictionary(r => r.Key, r => r.Value);
+
+            foreach (var user in resultMaxF)
+            {
+                Console.WriteLine($"{user.Key} | {user.Value}");
+            }
+
+            Console.WriteLine("Submissions:");
+            foreach (var l in langDict)
+            {
+                Console.WriteLine($"{l.Key} - {l.Value}");
+            }
+
+        }
+
     }
 }

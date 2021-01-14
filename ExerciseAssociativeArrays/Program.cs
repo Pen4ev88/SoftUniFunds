@@ -17,6 +17,8 @@ namespace ExerciseAssociativeArrays
             Console.WriteLine("6. Cources:");
             Console.WriteLine("7. StudentAcademy:");
             Console.WriteLine("8. CompanyUser:");
+            Console.WriteLine("9. ForceBook:");
+            Console.WriteLine("10. Exam:");
 
             int switch_on = int.Parse(Console.ReadLine());
 
@@ -62,8 +64,17 @@ namespace ExerciseAssociativeArrays
                         exercise.CompanyUser();
                         break;
                     } 
-
-
+                 case 9:
+                    {
+                        exercise.ForceBook();
+                        break;
+                    }
+                  case 10:
+                    {
+                        exercise.SoftUniExam();
+                        break;
+                    }             
+                
                 default:
                     Console.WriteLine("Exit:");
                     break;
