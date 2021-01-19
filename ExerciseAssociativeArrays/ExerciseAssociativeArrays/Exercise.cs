@@ -458,7 +458,7 @@ namespace SoftUniFunds.ExerciseAssociativeArrays
             if (someSide.Values.First() == someSide.Values.Last())
             { 
                 Console.Write("Side: ");
-                Console.WriteLine($"{someSide.Values.First()}, Member: {someSide.Values.Count}");
+                Console.WriteLine($"{someSide.Values.First()}, Members: {someSide.Values.Count}");
 
                 foreach (var usr in forceSide.OrderBy(c => c.Key))
                 {
