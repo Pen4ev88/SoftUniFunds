@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ExerciseLists
@@ -254,5 +255,135 @@ namespace ExerciseLists
             }
 
         }   
+
+        public void BombNumbers()
+        {
+            var bombList = new List<int>();
+
+            var bombNumbers = (Console.ReadLine().Split(" "));
+            foreach (var item in bombNumbers)
+            {
+                bombList.Add(int.Parse(item));
+            }
+
+            var bombPower = (Console.ReadLine().Split(" "));
+            var numbPower = int.Parse(bombPower[0]);
+            var numbAccurancy = int.Parse(bombPower[1]);
+
+            for (int i = 0; i < bombList.Count; i++)
+            {
+                int indx = bombList.IndexOf(numbPower);
+                if(indx < 0 || indx > bombList.Count)
+                {
+                    continue;
+                }
+
+                bombList[indx] = 0;
+                if(numbAccurancy > 0)
+                {
+                    for (int j = 1; j <= numbAccurancy; j++)
+                    {
+                        if(indx - j >= 0)
+                        {
+                            bombList[indx - j] = 0;
+                        }
+                        if (indx + j <= bombList.Count - 1)
+                        {
+                            bombList[indx + j] = 0;
+                        }
+                    }
+                }
+            }
+
+            Console.WriteLine(bombList.Sum());
+        }
+
+        public void CardGame()
+        {
+            var firstPlayer = new List<int>();
+            var secondPlayer = new List<int>();
+
+
+            var firstCard = (Console.ReadLine().Split(" "));
+            var secondCard = (Console.ReadLine().Split(" "));
+
+            foreach (var item in firstCard)
+            {
+                firstPlayer.Add(int.Parse(item));
+            }
+
+            foreach (var item in secondCard)
+            {
+                secondPlayer.Add(int.Parse(item));
+            }
+
+            while (true)
+            {
+                if(firstPlayer.Count < 1 || secondPlayer.Count < 1)
+                {
+                    break;
+                }
+                for (int i = 0; i < 
+                                    (firstPlayer.Count <= secondPlayer.Count 
+                                    ? firstPlayer.Count 
+                                    : secondPlayer.Count);                      i++)
+                {
+                    if (firstPlayer[0] > secondPlayer[0])
+                    {                        
+                        firstPlayer.Add(firstPlayer[0]);
+                        firstPlayer.Add(secondPlayer[0]);
+                        firstPlayer.RemoveAt(0);
+                        secondPlayer.RemoveAt(0);
+                        break;
+                    }
+                    else if(firstPlayer[i] < secondPlayer[0])
+                    {
+                        secondPlayer.Add(secondPlayer[0]);
+                        secondPlayer.Add(firstPlayer[0]);
+                        firstPlayer.RemoveAt(0);
+                        secondPlayer.RemoveAt(0);
+                        break;
+                    }
+                    else
+                    {
+                        firstPlayer.RemoveAt(0);
+                        secondPlayer.RemoveAt(0);
+                        break;
+                    }
+                }
+            }
+
+            if (firstPlayer.Count <= secondPlayer.Count)
+                Console.WriteLine($"First player wins! Sum: {secondPlayer.Sum()}");
+            else
+                Console.WriteLine($"Second player wins! Sum: {firstPlayer.Sum()}");
+        }
+
+        public void AppendArrays()
+        {
+            var orderList = new List<int>();
+
+            var allLists = Console.ReadLine().Split("|");
+            
+            for (int i = allLists.Length - 1; i >= 0; i--)
+           
+            {
+                var subList = allLists[i].Split(" ", StringSplitOptions.RemoveEmptyEntries).ToArray();
+
+                var tmpList = new List<int>(); 
+                for (int j = 0; j < subList.Length; j++)
+                {
+                    tmpList.Add(int.Parse(subList[j]));
+                }
+
+                orderList.AddRange(tmpList);
+            }
+
+            foreach (var item in orderList)
+            {
+                Console.Write(item + " ");
+            }
+        }
+
     }
 }

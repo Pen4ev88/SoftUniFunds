@@ -12,6 +12,9 @@ namespace ExerciseLists
             Console.WriteLine("2. ChangeList:");
             Console.WriteLine("3. HouseParty:");
             Console.WriteLine("4. ListOperation:");
+            Console.WriteLine("5. BombNumbers:");
+            Console.WriteLine("6. CardGame:");
+            Console.WriteLine("7. AppendArrays:");
 
             int switch_on = int.Parse(Console.ReadLine());
 
@@ -35,6 +38,21 @@ namespace ExerciseLists
                 case 4:
                     {
                         exercise.ListOperation();
+                        break;
+                    }
+                case 5:
+                    {
+                        exercise.BombNumbers();
+                        break;
+                    }
+                case 6:
+                    {
+                        exercise.CardGame();
+                        break;
+                    }
+                case 7:
+                    {
+                        exercise.AppendArrays();
                         break;
                     }
 
