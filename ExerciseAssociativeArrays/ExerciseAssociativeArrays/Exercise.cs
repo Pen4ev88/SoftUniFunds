@@ -367,10 +367,9 @@ namespace SoftUniFunds.ExerciseAssociativeArrays
 
         public void ForceBook()
         {
-            var forceSide = new SortedDictionary<string, string>();
-            var sideTranslate = new Dictionary<string, string>();
-
-            var sideMember = new SortedDictionary<string, int>();
+            SortedDictionary<string, string> sideNameUsers = new SortedDictionary<string, string>();
+            Dictionary<string, string> sideTranslate = new Dictionary<string, string>();
+            List<string> joinUser = new List<string>();
 
             while (true)
             {
@@ -382,113 +381,58 @@ namespace SoftUniFunds.ExerciseAssociativeArrays
                 if (userForce.Contains("|"))
                 {
 
-                    var force = userForce.Split(" | ").ToArray();
+                    string[] force = userForce.Split(" | ");
+                    string currentForceSide = force[0];
+                    string currentUserName = force[1];
 
-                    // COUNT MEMBER
-                    if (!sideMember.ContainsKey(force.First()))
+                    if (!sideNameUsers.ContainsKey(currentUserName))
                     {
-                        sideMember[force.First()] = 1;
-                    }
-                    else
-                    {
-                        sideMember[force.First()]++;
-                    }
-
-                    // Add side members
-                    if (!forceSide.ContainsKey(force.First()))
-                    {
-                        forceSide[force.Last()] = "";
-                        forceSide[force.Last()] = force.First();
-                    }
-                    else
-                    {
-                        if (!forceSide[force.Last()].Contains(force.First()))
-                        {
-                            forceSide[force.Last()] = force.First();
-                        }
-                    }
+                        sideNameUsers.Add(currentUserName, currentForceSide);
+                    }                    
                 }
-                if (userForce.Contains(">"))    // change SIDE or Create new Force User
+                else if (userForce.Contains("->")) 
                 {
-                    var forceTrance = userForce.Split(" -> ").ToArray();
+                    string[] force = userForce.Split(" -> ").ToArray();
 
-                    if (!forceSide.ContainsKey(forceTrance.First())) // create new user
+                    string currentForceSide = force[1];
+                    string currentUserName = force[0];
+
+                    if (!sideNameUsers.ContainsKey(currentUserName))
                     {
-                        forceSide[forceTrance.First()] = forceTrance.Last();
-
-                        if (!sideMember.ContainsKey(forceTrance.Last()))
-                        {
-                            sideMember[forceTrance.Last()] = 1;
-                        }
-                        else
-                        {
-                            sideMember[forceTrance.Last()]++;
-                        }
-                    }
-                    else // remove user from his SIDE and add to Oposite Side
-                    {
-                        forceSide.Remove(forceTrance.First());
-
-                        forceSide[forceTrance.First()] = forceTrance.Last();
-                        sideMember[forceTrance.Last().ToString()]++;
-                    }
-
-                    if (!sideTranslate.ContainsKey(forceTrance.First()))
-                    {
-                        sideTranslate[forceTrance.First()] = "";
-                        sideTranslate[forceTrance.First()] = forceTrance.Last();
+                        sideNameUsers.Add(currentUserName, currentForceSide);
                     }
                     else
                     {
-                        if (!sideTranslate[forceTrance.First()].Contains(forceTrance.Last()))
-                        {
-                            sideTranslate[forceTrance.First()] = forceTrance.Last();
-                        }
+                        sideNameUsers[currentUserName] = currentForceSide;
                     }
+
+                    joinUser.Add($"{currentUserName } joins the {currentForceSide} side!");
                 }
             }
 
-            foreach (var usr in sideTranslate)
+            foreach (string joining in joinUser)
             {
-                Console.WriteLine($"{usr.Key } joins the {usr.Value} side!");
-            }       
-
-            var someSide = forceSide.OrderBy(f => f.Value).ToDictionary(f => f.Key, f => f.Value);
-
-            if (someSide.Values.First() == someSide.Values.Last())
-            { 
-                Console.Write("Side: ");
-                Console.WriteLine($"{someSide.Values.First()}, Members: {someSide.Values.Count}");
-
-                foreach (var usr in forceSide.OrderBy(c => c.Key))
-                {
-                    Console.WriteLine($"! {usr.Key}");
-                }
+                Console.WriteLine(joining);
             }
-            else
+
+            Dictionary<string, IEnumerable<string>> sideResult = sideNameUsers
+                .GroupBy(x => x.Value)
+                .OrderBy(x => x.Count())
+                .ThenBy(x => x.Key)
+                .ToDictionary(x => x.Key, x => x.Select(y => y.Key));
+
+            foreach (KeyValuePair<string, IEnumerable<string>> sideNameUser in sideResult)
             {
-                var sideL = someSide.Values.First();
-                var sideR = someSide.Values.Last();
-
-                var memberCountL = forceSide.Where(f => f.Value == sideL).Count();
-                Console.Write("Side: ");
-                Console.WriteLine($"{sideL}, Members: {memberCountL}");
-                                
-                foreach (var usr in someSide.Where(s => s.Value == sideL))
-                {
-                    Console.WriteLine($"! {usr.Key}");
-                }
-
-                var memberCountR = forceSide.Where(f => f.Value == sideR).Count();
-                Console.Write("Side: ");
-                Console.WriteLine($"{sideR}, Members: {memberCountR}");
-
-                foreach (var usr in someSide.Where(s => s.Value == sideR))
-                {
-                    Console.WriteLine($"! {usr.Key}");
-                }
-            }            
+                Console.WriteLine($"Side: {sideNameUser.Key}, Members: {sideNameUser.Value.Count()}");
+                
+                foreach (string user in sideNameUser.Value)
+                {                    
+                    Console.WriteLine($"! {user}");
+                }                    
+            }
+                          
         }
+
 
         public void SoftUniExam()
         {

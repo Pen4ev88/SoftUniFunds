@@ -15,6 +15,7 @@ namespace ExerciseLists
             Console.WriteLine("5. BombNumbers:");
             Console.WriteLine("6. CardGame:");
             Console.WriteLine("7. AppendArrays:");
+            Console.WriteLine("8. AnonymousThreat:");
 
             int switch_on = int.Parse(Console.ReadLine());
 
@@ -55,6 +56,12 @@ namespace ExerciseLists
                         exercise.AppendArrays();
                         break;
                     }
+                case 8:
+                    {
+                        exercise.AnonymousTreat();
+                        break;
+                    }
+
 
                 default:
                     Console.WriteLine("Exit:");
