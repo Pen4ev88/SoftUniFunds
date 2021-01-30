@@ -1,4 +1,5 @@
-﻿using SoftUniFunds.ExerciseAssociativeArrays;
+﻿using ExerciseAssociativeArrays.TasksAssociativeArrays;
+using SoftUniFunds.ExerciseAssociativeArrays;
 using System;
 
 namespace ExerciseAssociativeArrays
@@ -6,8 +7,7 @@ namespace ExerciseAssociativeArrays
     class Program
     {
         static void Main(string[] args)
-        {
-            Exercise exercise = new Exercise();
+        {            
             Console.WriteLine("Select task of Exercise:");
             Console.WriteLine("1. CountChar:");
             Console.WriteLine("2. MinerTest:");
@@ -20,58 +20,69 @@ namespace ExerciseAssociativeArrays
             Console.WriteLine("9. ForceBook:");
             Console.WriteLine("10. Exam:");
 
+            CountChar countChar = new CountChar();
+            MinerTast minerTast = new MinerTast();
+            LegendaryFarming legendaryFarming = new LegendaryFarming();
+            Orders orders = new Orders();
+            SoftUniParking softUniParking = new SoftUniParking();
+            Courses courses = new Courses();
+            StudentAcademy studentAcademy = new StudentAcademy();
+            CompanyUser companyUser = new CompanyUser();
+            ForceBook forceBook = new ForceBook();
+            SoftUniExam softUniExam = new SoftUniExam();
+
             int switch_on = int.Parse(Console.ReadLine());
 
             switch (switch_on)
             {
                 case 1:
                     {
-                        exercise.CountChar();
+                        countChar.TaskCountChar();
                         break;
                     }
                 case 2:
                     {
-                        exercise.MinerTast();
+                        minerTast.TaskMinerTast();
                         break;
                     }
                  case 3:
                     {
-                        exercise.LegendaryFarming();
+                        legendaryFarming.TsakLegendaryFarming();
                         break;
                     } 
                  case 4:
                     {
-                        exercise.Orders();
+                        orders.TaskOrders();
                         break;
                     } 
                  case 5:
                     {
-                        exercise.SoftUniParking();
+                        softUniParking.TaskSoftUniParking();
                         break;
                     } 
                  case 6:
                     {
-                        exercise.Courses();
+                        courses.TaskCourses();
                         break;
                     } 
                  case 7:
                     {
-                        exercise.StudentAcademy();
+                        studentAcademy.TaskStudentAcademy();
                         break;
                     } 
                  case 8:
                     {
-                        exercise.CompanyUser();
+                        companyUser.TaskCompanyUser();
                         break;
                     } 
                  case 9:
                     {
-                        exercise.ForceBook();
+                        forceBook.TaskForceBook();
                         break;
                     }
                   case 10:
                     {
-                        exercise.SoftUniExam();
+                        softUniExam.TaskSoftUniExam();
                         break;
                     }             
                 

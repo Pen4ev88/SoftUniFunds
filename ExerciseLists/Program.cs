@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ExerciseLists.Tasks;
+using ExerciseLists.TasksList;
+using System;
 
 namespace ExerciseLists
 {
@@ -6,9 +8,8 @@ namespace ExerciseLists
     {
         public static void Main(string[] args)
         {
-            Exercise exercise = new Exercise();
             Console.WriteLine("Select task of Exercise:");
-            Console.WriteLine("1. CountChar:"); 
+            Console.WriteLine("1. Train:"); 
             Console.WriteLine("2. ChangeList:");
             Console.WriteLine("3. HouseParty:");
             Console.WriteLine("4. ListOperation:");
@@ -16,6 +17,17 @@ namespace ExerciseLists
             Console.WriteLine("6. CardGame:");
             Console.WriteLine("7. AppendArrays:");
             Console.WriteLine("8. AnonymousThreat:");
+            Console.WriteLine("9. PokemonDontGo:");
+
+            Train train = new Train();
+            ListOperation listOperation = new ListOperation();
+            HouseParty houseParty = new HouseParty();
+            ChangeList changeList = new ChangeList();
+            CardGame cardGame = new CardGame();
+            BombNumbers bombNumbers = new BombNumbers();
+            AppendArrays appendArrays = new AppendArrays();
+            AnonymousTreat anonymousTreat = new AnonymousTreat();
+            PokemonDontGo pokemonDontGo = new PokemonDontGo();
 
             int switch_on = int.Parse(Console.ReadLine());
 
@@ -23,45 +35,49 @@ namespace ExerciseLists
             {
                 case 1:
                     {
-                        exercise.Train();
+                        train.TaskTrain();
                         break;
                     }
                 case 2:
                     {
-                        exercise.ChangeList();
+                        listOperation.TaskListOperation();
                         break;
                     }
                 case 3:
                     {
-                        exercise.HouseParty();
+                        houseParty.TaskHouseParty();
                         break;
                     }
                 case 4:
                     {
-                        exercise.ListOperation();
+                        cardGame.TaskCardGame();
                         break;
                     }
                 case 5:
                     {
-                        exercise.BombNumbers();
+                        changeList.TaskChangeList();
                         break;
                     }
                 case 6:
                     {
-                        exercise.CardGame();
+                        appendArrays.TaskAppendArrays();
                         break;
                     }
                 case 7:
                     {
-                        exercise.AppendArrays();
+                        bombNumbers.TaskBombNumbers();
                         break;
                     }
                 case 8:
                     {
-                        exercise.AnonymousTreat();
+                        anonymousTreat.TaskAnonymousTreat();
                         break;
                     }
-
+                case 9:
+                    {
+                        pokemonDontGo.TaskPokemonDontGo();
+                        break;
+                    }
 
                 default:
                     Console.WriteLine("Exit:");
