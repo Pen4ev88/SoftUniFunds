@@ -1,5 +1,4 @@
 ﻿using ExerciseAssociativeArrays.TasksAssociativeArrays;
-using SoftUniFunds.ExerciseAssociativeArrays;
 using System;
 
 namespace ExerciseAssociativeArrays

@@ -18,6 +18,7 @@ namespace ExerciseLists
             Console.WriteLine("7. AppendArrays:");
             Console.WriteLine("8. AnonymousThreat:");
             Console.WriteLine("9. PokemonDontGo:");
+            Console.WriteLine("10. SoftUniCourse:");
 
             Train train = new Train();
             ListOperation listOperation = new ListOperation();
@@ -28,6 +29,7 @@ namespace ExerciseLists
             AppendArrays appendArrays = new AppendArrays();
             AnonymousTreat anonymousTreat = new AnonymousTreat();
             PokemonDontGo pokemonDontGo = new PokemonDontGo();
+            SoftUniCourse softUniCourse = new SoftUniCourse();
 
             int switch_on = int.Parse(Console.ReadLine());
 
@@ -76,6 +78,11 @@ namespace ExerciseLists
                 case 9:
                     {
                         pokemonDontGo.TaskPokemonDontGo();
+                        break;
+                    }
+                case 10:
+                    {
+                        softUniCourse.TaskSoftUniCourse();
                         break;
                     }
 

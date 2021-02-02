@@ -60,6 +60,10 @@ namespace ExerciseLists.TasksList
                 {
                     listPokemons.RemoveAt(indexToRemove);
                 }
+                else
+                {
+                    listPokemons[indexToRemove] += listPokemons[indexToRemove];
+                }
 
             }
 
