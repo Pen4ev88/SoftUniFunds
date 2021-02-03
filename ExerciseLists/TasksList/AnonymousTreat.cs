@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace ExerciseLists.TasksList
 {
     public class AnonymousTreat
     {
+        // TODO - Rename
+        public string JoinMyStrings(string x, string y) => string.Join("", new string[] { x, y });
+
         public void TaskAnonymousTreat()
         {
             List<string> hyperVirus = new List<string>();
@@ -28,9 +32,11 @@ namespace ExerciseLists.TasksList
                 {
                     List<string> merge = new List<string>();
 
+                    // TODO - Math.Min/Max
+
                     int startIndx = int.Parse(virusAction[1]);
                     int endIndx = int.Parse(virusAction[2]);
-
+                    
                     if (startIndx < 0)
                     {
                         startIndx = 0;
@@ -40,32 +46,58 @@ namespace ExerciseLists.TasksList
                         endIndx = virusString.Count - 1;
                     }
 
-                    for (int i = 0; i < virusString.Count; i++)
-                    {
-                        if ((i < startIndx || i > endIndx) && virusString[i] != "")
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            int whileTrue = endIndx - startIndx + 1;
-                            string strArray = "";
-                            int nextIndx = startIndx;
-                            while (whileTrue > 0)
-                            {
-                                strArray += virusString[nextIndx];
-                                nextIndx++;
-                                whileTrue--;
-                            }
+                    // Skip items before start index and save them
+                    List<string> skippedElements = virusString
+                        .Take(startIndx)
+                        .ToList();
 
-                            i = endIndx;
+                    // ab cd ef gh jk as sa fdf
+                    // Merge items between start ind and end ind
+                    string mergedItemsResult  = virusString
+                        .Skip(startIndx) // 0 => skips nothing : 2 => skips 0, 1
+                        .Take(endIndx - startIndx) // 5 - 2 = 3 // result = ef gh jk
+                        .Aggregate(JoinMyStrings);
 
-                            merge.Add(strArray);
-                        }
-                    }
+                    // Join rest of items if any
+                    List<string> leftItemsAfterMerge = virusString
+                        .Skip(endIndx)
+                        .Take(virusString.Count - endIndx) // 8 - 1 - 5 = 2
+                        .ToList();
 
-                    virusString.RemoveAt(endIndx);
-                    virusString.InsertRange(endIndx, merge);
+                    virusString = new List<string>(skippedElements);
+                    virusString.Add(mergedItemsResult);
+                    virusString.AddRange(leftItemsAfterMerge);
+
+
+                    //for (int i = 0; i < virusString.Count; i++)
+                    //{
+                    //    if ((i < startIndx || i > endIndx) && virusString[i] != "")
+                    //    {
+                    //        continue;
+                    //    }
+                    //    else
+                    //    {
+                    //        int whileTrue = endIndx - startIndx + 1;
+                    //        string strArray = "";
+                    //        int nextIndx = startIndx;
+
+                    //        // Merge items
+                    //        while (whileTrue > 0)
+                    //        {
+                    //            strArray += virusString[nextIndx];
+                    //            nextIndx++;
+                    //            whileTrue--;
+                    //        }
+
+                    //        i = endIndx;
+
+                    //        // Add left items
+                    //        merge.Add(strArray);
+                    //    }
+                    //}
+
+                    //virusString.RemoveAt(endIndx);
+                    //virusString.InsertRange(endIndx, merge);
 
 
                     for (int i = startIndx; i < endIndx; i++)
