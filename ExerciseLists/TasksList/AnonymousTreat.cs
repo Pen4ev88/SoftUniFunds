@@ -47,63 +47,22 @@ namespace ExerciseLists.TasksList
                     }
 
                     // Skip items before start index and save them
-                    List<string> skippedElements = virusString
-                        .Take(startIndx)
-                        .ToList();
+                    IEnumerable<string> skippedElements = virusString
+                        .Take(startIndx);                        
 
-                    // ab cd ef gh jk as sa fdf
                     // Merge items between start ind and end ind
                     string mergedItemsResult  = virusString
-                        .Skip(startIndx) // 0 => skips nothing : 2 => skips 0, 1
-                        .Take(endIndx - startIndx) // 5 - 2 = 3 // result = ef gh jk
+                        .Skip(startIndx)
+                        .Take(endIndx - startIndx) 
                         .Aggregate(JoinMyStrings);
 
-                    // Join rest of items if any
-                    List<string> leftItemsAfterMerge = virusString
-                        .Skip(endIndx)
-                        .Take(virusString.Count - endIndx) // 8 - 1 - 5 = 2
-                        .ToList();
+                    // Collect left items after merge
+                    IEnumerable<string> leftItemsAfterMerge = virusString
+                        .TakeLast(virusString.Count - endIndx); 
 
                     virusString = new List<string>(skippedElements);
                     virusString.Add(mergedItemsResult);
                     virusString.AddRange(leftItemsAfterMerge);
-
-
-                    //for (int i = 0; i < virusString.Count; i++)
-                    //{
-                    //    if ((i < startIndx || i > endIndx) && virusString[i] != "")
-                    //    {
-                    //        continue;
-                    //    }
-                    //    else
-                    //    {
-                    //        int whileTrue = endIndx - startIndx + 1;
-                    //        string strArray = "";
-                    //        int nextIndx = startIndx;
-
-                    //        // Merge items
-                    //        while (whileTrue > 0)
-                    //        {
-                    //            strArray += virusString[nextIndx];
-                    //            nextIndx++;
-                    //            whileTrue--;
-                    //        }
-
-                    //        i = endIndx;
-
-                    //        // Add left items
-                    //        merge.Add(strArray);
-                    //    }
-                    //}
-
-                    //virusString.RemoveAt(endIndx);
-                    //virusString.InsertRange(endIndx, merge);
-
-
-                    for (int i = startIndx; i < endIndx; i++)
-                    {
-                        virusString[i] = "";
-                    }
                 }
 
                 if (virusAction.Contains("divide"))
