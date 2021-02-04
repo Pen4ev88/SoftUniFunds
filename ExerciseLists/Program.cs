@@ -27,7 +27,7 @@ namespace ExerciseLists
             CardGame cardGame = new CardGame();
             BombNumbers bombNumbers = new BombNumbers();
             AppendArrays appendArrays = new AppendArrays();
-            AnonymousTreat anonymousTreat = new AnonymousTreat();
+            AnonymousThreat anonymousThreat = new AnonymousThreat();
             PokemonDontGo pokemonDontGo = new PokemonDontGo();
             SoftUniCourse softUniCourse = new SoftUniCourse();
 
@@ -72,7 +72,7 @@ namespace ExerciseLists
                     }
                 case 8:
                     {
-                        anonymousTreat.TaskAnonymousTreat();
+                        anonymousThreat.TaskAnonymousThreat();
                         break;
                     }
                 case 9:

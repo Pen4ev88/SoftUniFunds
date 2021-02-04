@@ -50,8 +50,8 @@ namespace ExerciseLists.TasksList
 
                     if (!baseSchedule.Contains(insString[0]))
                     {
-                        int position = int.Parse(insString[1].ToString());
-                        baseSchedule.Insert(position, insString[0].ToString());
+                        int position = int.Parse(insString[1]);
+                        baseSchedule.Insert(position, insString[0]);
                     }
                 }
                  else if(tmpString.Contains("Swap:"))
