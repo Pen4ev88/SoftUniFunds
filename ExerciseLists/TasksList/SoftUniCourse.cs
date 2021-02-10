@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace ExerciseLists.TasksList
 {
@@ -26,7 +25,6 @@ namespace ExerciseLists.TasksList
             {   
                 if(tmpString.Contains(addCommand))
                 {
-                    //string newCourse = tmpString.Skip(4).ToString();
                     string newCourse =  tmpString.Remove(0, 4);
 
                     if (!baseScheduleList.Contains(newCourse))
@@ -37,7 +35,6 @@ namespace ExerciseLists.TasksList
                 }
                 else if(tmpString.Contains(removeCommand))
                 {
-                    //string delCourse = tmpString.Skip(7).ToString();
                     string delCourse =  tmpString.Remove(0, 7);
 
                     if(baseScheduleList.Contains(delCourse))
@@ -52,7 +49,6 @@ namespace ExerciseLists.TasksList
                 }
                 else if(tmpString.Contains(insertCommand))
                 {
-                    //string newCourse = tmpString.Skip(7).ToString();
                     string newCourse =  tmpString.Remove(0, 7);
 
                     string[] insString = newCourse.Split(":");
@@ -81,53 +77,20 @@ namespace ExerciseLists.TasksList
                         baseScheduleList.Insert(indxToSwapSecond + 1, swapFirst.ToString());
                         baseScheduleList.RemoveAt(indxToSwapFirst + 1);
                         baseScheduleList.RemoveAt(indxToSwapSecond + 1);
-
-                        //baseScheduleList.Insert(indxToSwapFirst, swapNext.ToString());
-
-                        //if (baseScheduleList.Contains(swapNext + "-Exercise"))
-                        //{
-                        //    int indxExercise = baseScheduleList.IndexOf(swapNext + "-Exercise");
-                        //    baseScheduleList.Insert(indxToSwapFirst + 1, (swapNext + "-Exercise").ToString());
-                        //    baseScheduleList.RemoveAt(indxExercise + 1);
-                        //    baseScheduleList.RemoveAt(indxToSwapFirst + 2);
-                        //    indxToSwapSecond++;
-                        //}
-                        //else
-                        //{
-                        //    baseScheduleList.RemoveAt(indxToSwapFirst + 1);
-                        //}
-
-                        //baseScheduleList.Insert(indxToSwapSecond, swapFirst.ToString());
-
-                        //if (baseScheduleList.Contains(swapFirst + "-Exercise"))
-                        //{
-                        //    int indxExercise = baseScheduleList.IndexOf(swapFirst + "-Exercise");
-                        //    baseScheduleList.Insert(indxToSwapSecond + 1, (swapFirst + "-Exercise").ToString());
-                        //    baseScheduleList.RemoveAt(indxExercise + 1);
-                        //    baseScheduleList.RemoveAt(indxToSwapSecond + 2);
-                        //}
-                        //else
-                        //{
-                        //    baseScheduleList.RemoveAt(indxToSwapSecond + 1);
-                        //}
                     }
                 }          
                  else if(tmpString.Contains(exerciseCommand))
                 { 
-                    //string lessonExercise = tmpString.Skip(9).ToString();
                     string lessonExercise = tmpString.Remove(0, 9);
 
                     if (!baseScheduleList.Contains(lessonExercise))
                     {                        
                         baseScheduleList.Add(lessonExercise);
-                        dictLessonExercise.Add(lessonExercise, true);
-                        //baseScheduleList.Add(lessonExercise + "-Exercise");                        
+                        dictLessonExercise.Add(lessonExercise, true);                       
                     }
                     else
                     {
-                        //int indx = baseScheduleList.IndexOf(lessonExercise);
                         dictLessonExercise[lessonExercise] = true;
-                        //baseScheduleList.Insert(indx , lessonExercise + "-Exercise");
                     }
                 }                      
             }
