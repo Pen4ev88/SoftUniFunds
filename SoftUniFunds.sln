@@ -14,9 +14,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lists", "Lists", "{5013A94C-4FDD-4C6F-8DE7-D82BA857F0F6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Arrays", "Arrays", "{C6A1710D-9D27-4A08-BBD9-51A83CB80569}"
-	ProjectSection(SolutionItems) = preProject
-		ArrayProject\Program.cs = ArrayProject\Program.cs
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExerciseArray", "ArrayProject\ExerciseArray.csproj", "{80AF58D0-3DFB-4775-9D9E-2D552A809B3C}"
 EndProject

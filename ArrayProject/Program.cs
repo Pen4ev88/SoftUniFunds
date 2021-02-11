@@ -17,6 +17,7 @@ namespace ExerciseArray
             Console.WriteLine("6.EqualSum:");
             Console.WriteLine("7.MaxSequenceEquals:");
             Console.WriteLine("8.MagicSum:");
+            Console.WriteLine("9.KaminoFactory:");
 
             Train train = new Train();
             CommonElements commonElements = new CommonElements();
@@ -26,7 +27,9 @@ namespace ExerciseArray
             EqualSum equalSum = new EqualSum();
             MaxSequenceEquals maxSequenceEquals = new MaxSequenceEquals();
             MagicSum magicSum = new MagicSum();
-            
+            KaminoFactory kaminoFactory = new KaminoFactory();
+
+
             int switch_on = int.Parse(Console.ReadLine());
 
             switch (switch_on)
@@ -51,6 +54,9 @@ namespace ExerciseArray
                     break;
                case 8:
                     magicSum.TaskMagicSum();
+                    break;
+               case 9:
+                    kaminoFactory.TaskKaminoFactory();
                     break;
 
                 default:
